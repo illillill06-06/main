@@ -145,7 +145,7 @@ object-fit:cover;
 }
 
 /* ✅ 모바일 전용 */
-@media (max-width:600px){
+@media (max-width:767px){
 
 .live img{
 height:180px;
@@ -364,21 +364,25 @@ cursor:pointer;
     flex: 0 0 auto;
   }
 
+.menu-more{
+  flex: 0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding: 10px 8px;
+  margin-left:4px;
+
+  background:transparent;
+  color:#888;
+  font-size:22px;
+  font-weight:700;
+}
+
 .menu-wrap{
   position:relative;
 }
 
-.menu-wrap::after{
-  content:"›";
-  position:absolute;
-  right:8px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:26px;
-  font-weight:900;
-  color:#ff2d55;
-  pointer-events:none;
-}
 /* ⭐⭐⭐ 메뉴 옆으로 넘길 수 있다는 힌트 */
 .menu-wrap{
   position:relative;
@@ -458,7 +462,8 @@ font-weight:800;
    ========================= */
 
 /* iPad 세로/가로 공통(대부분 태블릿 폭) */
-@media (min-width: 601px) and (max-width: 1024px){
+@media (min-width:768px) and (max-width:1024px){
+}
 
   .container{
     padding: 28px 18px;
@@ -486,31 +491,18 @@ font-weight:800;
 
 /* iPad 가로(landscape)에서 상단 3열 유지 + 카드 높이 안정화 */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
-
   .grid-top{
     grid-template-columns: 2fr 1fr 1fr;
   }
-
   .live img{ height: 230px; }
 }
 
 .promise-menu:hover{
-transform:scale(1.08);
+  transform:scale(1.08);
 }
-
-/* iPad 가로(landscape)에서 상단 3열 유지 + 카드 높이 안정화 */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
-
-  .grid-top{
-    grid-template-columns: 2fr 1fr 1fr;
-  }
-
-  .live img{ height: 230px; }
-
 </style>
 </head>
 <body>
-
 <!-- 🔥 상단바 -->
 
 <div class="topbar">
@@ -529,6 +521,7 @@ transform:scale(1.08);
 </a>
 <a href="https://illillill06-06.github.io/label/" target="_blank">레이블시그표</a>
 <a href="https://illillill06-06.github.io/ewol/" target="_blank">개인방송시그표</a>
+    <div class="menu-more">›</div>
   </div>
 </div>
 
