@@ -364,14 +364,47 @@ cursor:pointer;
     flex: 0 0 auto;
   }
 
-  /* 검색창: 꽉 차게 */
+/* ⭐⭐⭐ 메뉴 옆으로 넘길 수 있다는 힌트 */
+.menu-wrap{
+  position:relative;
+}
+
+.menu-wrap::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:0;
+  height:100%;
+  width:50px;
+  pointer-events:none;
+
+  background:linear-gradient(
+    to left,
+    #d6f0ff 0%,
+    rgba(214,240,255,0.7) 40%,
+    rgba(214,240,255,0) 100%
+  );
+}
+
+/* 검색창: 모바일에서 오른쪽 잘림 방지 */
+  .topbar{
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
   .search-box{
     width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
   }
+
   .search{
     width: 100%;
     font-size: 15px;
+    min-width: 0;   /* ⭐ flex에서 잘림 방지 핵심 */
+    flex: 1;        /* ⭐ input이 남는 공간 먹게 */
   }
+
 
   /* 본문 패딩 */
   .container{
@@ -438,7 +471,8 @@ transform:scale(1.08);
 
 <a href="" class="logo">Ewol</a>
 
-<div class="menu">
+<div class="menu-wrap">
+  <div class="menu">
 <a href="https://play.sooplive.co.kr/bc3yu2fl" target="_blank" class="live-menu"> 🔴LIVE
 </a>
 <a href="https://www.sooplive.co.kr/station/bc3yu2fl/board" target="_blank" class="notice-menu"> 📢공지
@@ -449,6 +483,7 @@ transform:scale(1.08);
 </a>
 <a href="https://illillill06-06.github.io/label/" target="_blank">레이블시그표</a>
 <a href="https://illillill06-06.github.io/ewol/" target="_blank">개인방송시그표</a>
+  </div>
 </div>
 
 <div class="search-box">
