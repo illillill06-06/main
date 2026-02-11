@@ -45,10 +45,21 @@ box-shadow:0 6px 24px rgba(0,0,0,0.08);
 
 
 .logo{
+display:flex;
+align-items:center;
+gap:10px;
+
 font-weight:900;
 font-size:26px;
 text-decoration:none;
 color:#111;
+}
+
+.logo img{
+width:52px;
+height:52px;
+border-radius:50%;
+object-fit:cover;
 }
 
 .menu{
@@ -337,27 +348,36 @@ cursor:pointer;
 @media (max-width: 600px){
 
   /* 상단바: 세로 정렬 + 여백 줄이기 */
-  .topbar{
-    padding: 10px 14px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
+.topbar{
+  padding: 10px 14px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;   /* stretch → center 로 변경 */
+  gap: 10px;
+}
 
   /* 로고 */
-  .logo{
-    font-size: 22px;
-    line-height: 1;
-  }
+.logo{
+  font-size: 22px;
+  line-height: 1;
+
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
 
   /* 메뉴: 가로 스크롤 */
-  .menu{
-    gap: 10px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-    padding-bottom: 6px;
-  }
+.menu{
+  width:100%;
+  display:flex;
+  justify-content:flex-start;
+
+  gap: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  padding-bottom: 6px;
+}
 
   .menu a{
     display: inline-flex;
@@ -369,11 +389,6 @@ cursor:pointer;
     flex: 0 0 auto;
   }
 
-.menu-wrap{
-  position:relative;
-}
-
-/* ⭐⭐⭐ 메뉴 옆으로 넘길 수 있다는 힌트 */
 .menu-wrap{
   position:relative;
 }
@@ -453,7 +468,6 @@ font-weight:800;
 
 /* iPad 세로/가로 공통(대부분 태블릿 폭) */
 @media (min-width:768px) and (max-width:1024px){
-}
 
   .container{
     padding: 28px 18px;
@@ -477,6 +491,7 @@ font-weight:800;
 
   /* 글씨 살짝 정리 */
   .photo-title{ font-size: 16px; }
+
 }
 
 /* iPad 가로(landscape)에서 상단 3열 유지 + 카드 높이 안정화 */
@@ -503,6 +518,19 @@ font-weight:800;
 }
 
 }
+@media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
+
+.topbar{
+  flex-wrap:wrap;
+}
+
+.search-box{
+  width:100%;
+  margin-top:8px;
+}
+
+}
+
 </style>
 </head>
 <body>
@@ -510,7 +538,10 @@ font-weight:800;
 
 <div class="topbar">
 
-<a href="" class="logo">Ewol</a>
+<a href="" class="logo">
+  <img src="logo.jpg" class="logo-img">
+  Ewol
+</a>
 
 <div class="menu-wrap">
   <div class="menu">
