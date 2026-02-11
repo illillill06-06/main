@@ -5,12 +5,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>이월</title>
+<title>Ewol</title>
 
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 
 <style>
+
+.photo-title{
+padding:12px 14px;
+font-size:17px;
+font-weight:700;
+line-height:1.4;
+}
 
 body{
 margin:0;
@@ -30,24 +37,36 @@ justify-content:space-between;
 padding:14px 40px;
 
 background:linear-gradient(90deg,#ffd6ec,#d6f0ff);
-box-shadow:0 4px 12px rgba(0,0,0,0.05);
+backdrop-filter: blur(6px);
+box-shadow:0 6px 24px rgba(0,0,0,0.08);
 }
+
 
 .logo{
 font-weight:900;
 font-size:26px;
+text-decoration:none;
+color:#111;
 }
 
 .menu{
 display:flex;
-gap:26px;
+gap:20px;
 font-weight:600;
 }
 
 .menu a{
 text-decoration:none;
 color:#333;
+padding:8px 14px;
+border-radius:10px;
+transition:0.15s;
 }
+
+.menu a:hover{
+background:rgba(255,255,255,0.6);
+}
+
 
 .search{
 padding:8px 14px;
@@ -55,6 +74,17 @@ border-radius:10px;
 border:none;
 width:220px;
 }
+
+.search-box{
+display:flex;
+align-items:center;
+gap:6px;
+background:white;
+padding:6px 10px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
 
 /* 🔥 전체 레이아웃 */
 .container{
@@ -91,6 +121,20 @@ transform:translateY(-6px);
 box-shadow:0 14px 32px rgba(0,0,0,0.12);
 }
 
+.menu a{
+text-decoration:none;
+color:#333;
+padding:8px 14px;
+border-radius:10px;
+transition:0.18s;
+}
+
+.menu a:hover{
+transform:translateY(-3px);
+box-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
+
+
 
 /* 라이브 */
 .live img{
@@ -106,13 +150,22 @@ font-weight:700;
 
 /* 공지 */
 .notice{
-padding:16px;
+padding:22px;
 }
 
+.notice b{
+font-size:19px;
+font-weight:800;
+display:block;
+margin-bottom:16px;
+}
+
+
 .notice-item{
-padding:10px 0;
+padding:14px 6px;
 border-bottom:1px solid #eee;
-font-size:14px;
+font-size:15px;
+line-height:1.6;
 cursor:pointer;
 transition:0.15s;
 }
@@ -131,6 +184,10 @@ border:none;
 width:100%;
 height:110px;
 object-fit:cover;
+}
+
+.small-card{
+padding-bottom:12px;
 }
 
 /* 하단 큰 카드 */
@@ -204,9 +261,10 @@ animation:blink 1s infinite;
 transform:scale(1.05);
 }
 
-.promise-card:hover .promise-overlay{
-opacity:1;
+.promise-overlay{
+padding:6px 16px;
 }
+
 
 /* 🔥 공약 모달 */
 .modal{
@@ -259,10 +317,10 @@ transform:scale(1.08);
 
 <div class="topbar">
 
-<div class="logo">이월♥</div>
+<a href="" class="logo">Ewol</a>
 
 <div class="menu">
-<a href="https://play.sooplive.co.kr/bc3yu2fl" target="_blank" class="live-menu"> 🔴Live
+<a href="https://play.sooplive.co.kr/bc3yu2fl" target="_blank" class="live-menu"> 🔴LIVE
 </a>
 <a href="https://www.sooplive.co.kr/station/bc3yu2fl/board" target="_blank" class="notice-menu"> 📢공지
 </a>
@@ -274,7 +332,11 @@ transform:scale(1.08);
 <a href="https://illillill06-06.github.io/ewol/" target="_blank">개인방송시그표</a>
 </div>
 
-<input class="search" placeholder="검색">
+<div class="search-box">
+  🔍
+  <input class="search" placeholder="검색">
+</div>
+
 
 </div>
 
@@ -294,6 +356,7 @@ transform:scale(1.08);
 <div class="card notice">
 
 <b>📢 전체 게시판</b>
+
 
 <div class="notice-item"
 onclick="window.open('https://www.sooplive.co.kr/station/bc3yu2fl/board/82156946')">
@@ -353,7 +416,7 @@ onclick="window.open('https://m.sooplive.co.kr/itemstore/a/starballoon')">
 <div class="grid-bottom">
 
 <div class="card big" onclick="window.open('https://illillill06-06.github.io/label/')">
-<img src="pink.jpg">
+<img src="polpol.jpg">
     <div class="photo-title">
       🎥 레이블 시그 검색기
     </div>
@@ -376,7 +439,7 @@ onclick="window.open('https://m.sooplive.co.kr/itemstore/a/starballoon')">
 <div class="footer">
 
 <div class="sns">
-<a href="https://www.instagram.com/2.ewol/">📸인스타그램📸</a>
+<a href="https://www.instagram.com/2.ewol/">📸instargram📸</a>
 </div>
 
 </div>
@@ -414,7 +477,7 @@ style="cursor:pointer;">
   style="width:100%;height:240px;object-fit:cover;border-radius:18px;">
 
   <div style="padding:10px;font-weight:700;">
-  <span class="live-dot"></span>LIVE 방송 보러가기
+  <span class="live-dot"></span>LIVE 방송 
   </div>
 
 </div>
