@@ -12,6 +12,8 @@
 
 <style>
 
+html{ -webkit-text-size-adjust:100%; }
+
 .photo-title{
 padding:12px 14px;
 font-size:17px;
@@ -136,11 +138,24 @@ box-shadow:0 6px 14px rgba(0,0,0,0.08);
 
 
 
-/* 라이브 */
 .live img{
 width:100%;
 height:240px;
 object-fit:cover;
+}
+
+/* ✅ 모바일 전용 */
+@media (max-width:600px){
+
+.live img{
+height:180px;
+}
+
+.live-title{
+font-size:15px;
+padding:10px;
+}
+
 }
 
 .live-title{
@@ -251,6 +266,21 @@ margin-right:6px;
 animation:blink 1s infinite;
 }
 
+.live-dot.off{
+background:#bbb;
+animation:none;
+opacity:.6;
+}
+
+#liveText{
+font-weight:700;
+color:#ff2d55;
+}
+
+#liveText.off{
+color:#999;
+}
+
 @keyframes blink{
 0%{opacity:1;}
 50%{opacity:0.2;}
@@ -295,6 +325,95 @@ font-size:40px;   /* 🔥 34 → 40 추천 */
 color:white;
 cursor:pointer;
 }
+
+/* =========================
+   ✅ 모바일 최적화 (복붙)
+   ========================= */
+@media (max-width: 600px){
+
+  /* 상단바: 세로 정렬 + 여백 줄이기 */
+  .topbar{
+    padding: 10px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  /* 로고 */
+  .logo{
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  /* 메뉴: 가로 스크롤 */
+  .menu{
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    padding-bottom: 6px;
+  }
+
+  .menu a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;   /* 터치 영역 키움 */
+    font-size: 14px;
+    border-radius: 12px;
+    flex: 0 0 auto;
+  }
+
+  /* 검색창: 꽉 차게 */
+  .search-box{
+    width: 100%;
+  }
+  .search{
+    width: 100%;
+    font-size: 15px;
+  }
+
+  /* 본문 패딩 */
+  .container{
+    padding: 18px 12px;
+  }
+
+  /* 카드 hover 튐 방지(모바일은 hover 없음) */
+  .card:hover{
+    transform: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  }
+
+  /* 이미지 높이 모바일용 */
+  .live img{ height: 200px; }
+  .big img{ height: 200px; }
+  .small-card img{ height: 110px; }
+
+  /* 공지 영역 */
+  .notice{ padding: 16px; }
+  .notice b{ font-size: 17px; margin-bottom: 12px; }
+  .notice-item{ font-size: 14px; padding: 12px 4px; }
+
+  /* 큰 카드 제목 글씨 */
+  .photo-title{
+    font-size: 15px;
+    padding: 12px 12px;
+  }
+
+  /* 모달 닫기 버튼: 터치 쉽게 */
+  .modal-close{
+    top: 14px;
+    right: 16px;
+    font-size: 44px;
+  }
+}
+
+/* 아주 작은 폰 (아이폰 SE급) */
+@media (max-width: 360px){
+  .menu a{ font-size: 13px; padding: 9px 10px; }
+  .live img, .big img{ height: 180px; }
+}
+
 
 .modal-close:hover{
 transform:scale(1.2);
@@ -439,6 +558,7 @@ onclick="window.open('https://m.sooplive.co.kr/itemstore/a/starballoon')">
 <div class="footer">
 
 <div class="sns">
+<a href="https://www.youtube.com/@tv-vm6ke">🔔YouTube🔔</a>
 <a href="https://www.instagram.com/2.ewol/">📸instargram📸</a>
 </div>
 
@@ -477,7 +597,8 @@ style="cursor:pointer;">
   style="width:100%;height:240px;object-fit:cover;border-radius:18px;">
 
   <div style="padding:10px;font-weight:700;">
-  <span class="live-dot"></span>LIVE 방송 
+<span id="liveDot" class="live-dot off"></span>
+<span id="liveText" class="off">방송 준비중</span>
   </div>
 
 </div>
@@ -491,5 +612,44 @@ style="cursor:pointer;">
   <span class="modal-close" onclick="closePromise()">✕</span>
   <img src="promise.jpg" class="modal-img" onclick="event.stopPropagation()">
 </div>
+
+<script>
+
+const BJID = "bc3yu2fl";
+const CHECK_URL = `https://live.sooplive.co.kr/afreeca/player_live_api.php?bjid=${BJID}&type=live`;
+
+async function updateLiveDot(){
+  const dot = document.getElementById("liveDot");
+  const text = document.getElementById("liveText");
+  if (!dot || !text) return;
+
+  dot.classList.add("off");
+  text.classList.add("off");
+  text.innerText = "방송 준비중";
+
+  try{
+    const res = await fetch(CHECK_URL);
+    const data = await res.json();
+
+    const isLive = (data.RESULT == 1);
+
+dot.classList.toggle("off", !isLive);
+text.classList.toggle("off", !isLive);
+text.innerText = isLive ? "LIVE 방송" : "방송 준비중";
+
+}catch(e){
+  dot.classList.add("off");
+  text.classList.add("off");
+  text.innerText = "방송 준비중";
+  }
+}
+
+updateLiveDot();
+setInterval(updateLiveDot, 20000);
+
+
+</script>
+
 </body>
 </html>
+
