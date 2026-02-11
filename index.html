@@ -74,6 +74,8 @@ color:#333;
 padding:8px 14px;
 border-radius:10px;
 transition:0.15s;
+
+flex:0 0 auto;
 }
 
 .menu a:hover{
@@ -396,7 +398,6 @@ cursor:pointer;
 /* 검색창: 모바일에서 오른쪽 잘림 방지 */
   .topbar{
     box-sizing: border-box;
-    overflow-x: hidden;
   }
 
   .search-box{
@@ -483,6 +484,7 @@ font-weight:800;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
+    flex-wrap:nowrap;  
   }
 
   /* 카드 이미지 높이: 태블릿 비율 맞추기 */
