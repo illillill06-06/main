@@ -52,9 +52,9 @@ color:#111;
 }
 
 .menu{
-display:flex;
-gap:20px;
-font-weight:600;
+  display:flex;
+  gap:20px;
+  font-weight:600;
 }
 
 .menu a{
@@ -253,6 +253,11 @@ grid-template-columns:1fr;
 grid-template-columns:1fr;
 }
 
+/* ⭐ 메뉴 끝 살짝 잘리게 */
+.menu{
+padding-right:24px;
+}
+
 }
 
 /* 🔴 LIVE 점 업그레이드 */
@@ -363,21 +368,6 @@ cursor:pointer;
     border-radius: 12px;
     flex: 0 0 auto;
   }
-
-.menu-more{
-  flex: 0 0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding: 10px 8px;
-  margin-left:4px;
-
-  background:transparent;
-  color:#888;
-  font-size:22px;
-  font-weight:700;
-}
 
 .menu-wrap{
   position:relative;
@@ -500,6 +490,19 @@ font-weight:800;
 .promise-menu:hover{
   transform:scale(1.08);
 }
+/* ⭐ 아이패드 세로에서 검색창 아래로 보내기 */
+@media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
+
+.topbar{
+  flex-wrap:wrap;
+}
+
+.search-box{
+  width:100%;
+  margin-top:8px;
+}
+
+}
 </style>
 </head>
 <body>
@@ -521,7 +524,6 @@ font-weight:800;
 </a>
 <a href="https://illillill06-06.github.io/label/" target="_blank">레이블시그표</a>
 <a href="https://illillill06-06.github.io/ewol/" target="_blank">개인방송시그표</a>
-    <div class="menu-more">›</div>
   </div>
 </div>
 
