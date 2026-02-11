@@ -364,26 +364,24 @@ cursor:pointer;
     flex: 0 0 auto;
   }
 
-/* ⭐⭐⭐ 메뉴 옆으로 넘길 수 있다는 힌트 */
 .menu-wrap{
   position:relative;
 }
 
 .menu-wrap::after{
-  content:"";
+  content:"›";
   position:absolute;
-  right:0;
-  top:0;
-  height:100%;
-  width:50px;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:26px;
+  font-weight:900;
+  color:#ff2d55;
   pointer-events:none;
-
-  background:linear-gradient(
-    to left,
-    #d6f0ff 0%,
-    rgba(214,240,255,0.7) 40%,
-    rgba(214,240,255,0) 100%
-  );
+}
+/* ⭐⭐⭐ 메뉴 옆으로 넘길 수 있다는 힌트 */
+.menu-wrap{
+  position:relative;
 }
 
 /* 검색창: 모바일에서 오른쪽 잘림 방지 */
@@ -455,14 +453,62 @@ transform:scale(1.2);
 font-weight:800;
 }
 
+/* =========================
+   ✅ iPad / 태블릿 최적화
+   ========================= */
+
+/* iPad 세로/가로 공통(대부분 태블릿 폭) */
+@media (min-width: 601px) and (max-width: 1024px){
+
+  .container{
+    padding: 28px 18px;
+  }
+
+  /* 상단바: 너무 빡빡하지 않게 */
+  .topbar{
+    padding: 12px 20px;
+  }
+
+  /* 메뉴: 너무 길면 스크롤 허용(아이패드에서 특히 유용) */
+  .menu{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  /* 카드 이미지 높이: 태블릿 비율 맞추기 */
+  .live img{ height: 220px; }
+  .big img{ height: 220px; }
+
+  /* 글씨 살짝 정리 */
+  .photo-title{ font-size: 16px; }
+}
+
+/* iPad 가로(landscape)에서 상단 3열 유지 + 카드 높이 안정화 */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
+
+  .grid-top{
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .live img{ height: 230px; }
+}
+
 .promise-menu:hover{
 transform:scale(1.08);
 }
+
+/* iPad 가로(landscape)에서 상단 3열 유지 + 카드 높이 안정화 */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
+
+  .grid-top{
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .live img{ height: 230px; }
+
 </style>
-
-
 </head>
-
 <body>
 
 <!-- 🔥 상단바 -->
