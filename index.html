@@ -512,56 +512,48 @@ font-weight:800;
   transform:scale(1.08);
 }
 
-@media (min-width:768px) and (max-width:1366px) and (orientation:landscape){
+@media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
 
-  /* 🔥 핵심 — grid로 강제 2줄 */
   .topbar{
     display:grid;
-    grid-template-columns:1fr 200px;
+    grid-template-columns: 1fr 260px;   /* 검색창 더 길게 */
     grid-template-areas:
       "logo logo"
       "menu search";
-
     align-items:center;
-    gap:10px 14px;
+    gap:12px 18px;
     padding:10px 16px;
   }
 
-  /* ✅ 1줄 — 로고 가운데 */
   .logo{
     grid-area:logo;
     width:100%;
     display:flex;
-    justify-content:center;
+    justify-content:center;             /* 로고 가운데 */
   }
 
-  /* ✅ 2줄 — 메뉴 */
   .menu{
     grid-area:menu;
     display:flex;
     align-items:center;
-    gap:8px;
-
+    justify-content:center;             /* 메뉴가 왼쪽에만 붙는거 해결 */
+    gap:14px;                           /* 메뉴 간격 */
     overflow:visible;
     white-space:nowrap;
   }
 
   .menu a{
-    padding:6px 8px;
+    padding:6px 10px;
     font-size:13px;
   }
 
-  /* ✅ 2줄 — 검색창 오른쪽 */
   .search-box{
     grid-area:search;
-    width:200px;
+    width:260px;                        /* 검색창 더 길게 */
     justify-self:end;
   }
 
-  .search{
-    width:100%;
-  }
-
+  .search{ width:100%; }
 }
 
 </style>
