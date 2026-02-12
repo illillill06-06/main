@@ -356,8 +356,7 @@ cursor:pointer;
 /* =========================
    ✅ 모바일 최적화 (복붙)
    ========================= */
-@media (max-width: 600px),
-       (min-width:768px) and (max-width:1024px) and (orientation:portrait){
+@media (max-width: 600px){
 
   /* 상단바: 세로 정렬 + 여백 줄이기 */
 .topbar{
@@ -457,6 +456,14 @@ cursor:pointer;
     right: 16px;
     font-size: 44px;
   }
+}
+
+@media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
+
+  .menu{
+    justify-content:center;
+  }
+
 }
 
 /* 아주 작은 폰 (아이폰 SE급) */
