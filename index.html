@@ -299,6 +299,15 @@ color:#ff2d55;
 color:#999;
 }
 
+#liveTitle{
+  margin-top:8px;
+  font-weight:800;
+  color:#111;
+  line-height:1.4;
+  word-break:keep-all;
+  font-size:clamp(15px, 2.2vw, 18px);
+}
+
 @keyframes blink{
 0%{opacity:1;}
 50%{opacity:0.2;}
@@ -541,7 +550,7 @@ font-weight:800;
 </a>
 <a href="javascript:void(0);" onclick="openPromise()" class="promise-menu"> 📜공약
 </a>
-  <a href="https://m.sooplive.co.kr/itemstore/a/starballoon" target="_blank" class="charge-btn"> 💎별풍선 충전
+  <a href="https://www.ggpay.co.kr/goods/catalog?page=1&searchMode=catalog&category=c0004&per=40&filter_display=lattice"> 💎별풍선 충전
 </a>
 <a href="https://illillill06-06.github.io/label/" target="_blank"> 🎥레이블시그표</a>
 <a href="https://illillill06-06.github.io/ewol/" target="_blank"> 🎤개인방송시그표</a>
@@ -610,10 +619,10 @@ onclick="openPromise()">
 
 <!-- 충전 -->
 <div class="card small-card"
-onclick="window.open('https://m.sooplive.co.kr/itemstore/a/starballoon')">
+onclick="window.open('https://www.ggpay.co.kr/goods/catalog?page=1&searchMode=catalog&category=c0004&per=40&filter_display=lattice')">
 
   <div class="promise-wrap">
-    <img src="charge.jpg">
+    <img src="charge.gif">
 
     <div class="promise-overlay">
       💎 별풍선 충전
@@ -686,16 +695,17 @@ const card = document.getElementById("live-card");
 card.style.display = "block";
 
 card.innerHTML = `
-<div onclick="window.open('https://play.sooplive.co.kr/bc3yu2fl')"
-style="cursor:pointer;">
+<div id="liveClick" style="cursor:pointer;">
 
-  <img src="live-default.jpg"
+  <img id="liveImg" src="live-default.jpg"
   style="width:100%;height:240px;object-fit:cover;border-radius:18px;">
 
   <div style="padding:10px;font-weight:700;">
-<span id="liveDot" class="live-dot off"></span>
-<span id="liveText" class="off">방송 준비중</span>
+    <span id="liveDot" class="live-dot off"></span>
+    <span id="liveText" class="off">방송 준비중</span>
+    <div id="liveTitle"></div>
   </div>
+
 
 </div>
 `;
@@ -715,34 +725,70 @@ const BJID = "bc3yu2fl";
 const CHECK_URL = `https://live.sooplive.co.kr/afreeca/player_live_api.php?bjid=${BJID}&type=live`;
 
 async function updateLiveDot(){
+
   const dot = document.getElementById("liveDot");
   const text = document.getElementById("liveText");
-  if (!dot || !text) return;
+  const img = document.getElementById("liveImg");
+  const title = document.getElementById("liveTitle");
+  const card = document.getElementById("liveClick");
 
-  dot.classList.add("off");
-  text.classList.add("off");
-  text.innerText = "방송 준비중";
+  if (!dot || !text || !img || !title) return;
 
   try{
-    const res = await fetch(CHECK_URL);
+
+    const res = await fetch(
+      "https://flat-bonus-acec.yoonji061012.workers.dev/?bj=bc3yu2fl",
+      { cache:"no-store" }
+    );
+
     const data = await res.json();
 
-    const isLive = (data.RESULT == 1);
+    const isLive = data.RESULT === 1;
 
-dot.classList.toggle("off", !isLive);
-text.classList.toggle("off", !isLive);
-text.innerText = isLive ? "LIVE 방송" : "방송 준비중";
+    // 🔥 방송중
+    if(isLive){
 
-}catch(e){
-  dot.classList.add("off");
-  text.classList.add("off");
-  text.innerText = "방송 준비중";
+      dot.classList.remove("off");
+      text.classList.remove("off");
+
+      text.innerText = "LIVE 방송";
+
+      title.innerText = data.title ?? "";
+
+      card.onclick = () => window.open(data.url);
+
+      // ⭐ 썸네일 자동
+      img.src = `https://liveimg.sooplive.co.kr/${data.broadNo}.jpg?${Date.now()}`;
+
+    }
+
+    // 🔵 방송 OFF
+    else{
+
+      dot.classList.add("off");
+      text.classList.add("off");
+
+      text.innerText = "방송 준비중";
+      title.innerText = "";
+
+      img.src = "live-default.jpg";
+
+      card.onclick = () =>
+        window.open("https://play.sooplive.co.kr/bc3yu2fl");
+
+    }
+
+  }catch(e){
+
+    text.innerText = "방송 준비중";
+
   }
 }
 
-updateLiveDot();
-setInterval(updateLiveDot, 20000);
-
+document.addEventListener("DOMContentLoaded", () => {
+  updateLiveDot();
+  setInterval(updateLiveDot, 20000);
+});
 
 </script>
 
