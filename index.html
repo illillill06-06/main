@@ -505,12 +505,36 @@ font-weight:800;
 
 }
 
-/* iPad 가로(landscape)에서 상단 3열 유지 + 카드 높이 안정화 */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
+
+  .topbar{
+    padding:10px 16px;   /* ⭐ 여기 */
+    gap:12px;
+  }
+
   .grid-top{
     grid-template-columns: 2fr 1fr 1fr;
   }
+
   .live img{ height: 230px; }
+
+  /* ⭐ 여기부터 추가 */
+  .topbar{
+    gap:12px;
+  }
+
+  .menu{
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .search-box{
+    flex: 0 0 240px;
+    min-width:240px;
+  }
+
 }
 
 .promise-menu:hover{
@@ -663,7 +687,7 @@ onclick="window.open('https://www.ggpay.co.kr/goods/catalog?page=1&searchMode=ca
 <div class="footer">
 
 <div class="sns">
-<a href="https://www.youtube.com/@tv-vm6ke">🔔YouTube🔔</a>
+<a href="https://m.sooplive.co.kr/itemstore/a/starballoon">⚡아이폰 충전링크⚡</a>
 <a href="https://www.instagram.com/2.ewol/">📸instargram📸</a>
 </div>
 
