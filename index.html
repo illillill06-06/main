@@ -356,7 +356,8 @@ cursor:pointer;
 /* =========================
    ✅ 모바일 최적화 (복붙)
    ========================= */
-@media (max-width: 600px){
+@media (max-width: 600px),
+       (min-width:768px) and (max-width:1024px) and (orientation:portrait){
 
   /* 상단바: 세로 정렬 + 여백 줄이기 */
 .topbar{
@@ -478,29 +479,58 @@ font-weight:800;
 
 @media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
 
-  /* 🔥 핵심 1 — 메뉴가 공간 먹게 만들기 */
+  /* 2줄 구조 */
+  .topbar{
+    padding:10px 14px;
+    display:flex;
+    flex-direction:column;   /* ⭐ 로고 위, 메뉴+검색 아래 */
+    align-items:center;
+    gap:10px;
+  }
+
+  /* 윗줄: 로고 가운데 */
+  .logo{
+    width:100%;
+    justify-content:center;
+    font-size:24px;
+    gap:8px;
+  }
+  .logo img{
+    width:44px;
+    height:44px;
+  }
+
+  /* 아랫줄: 메뉴 + 검색창 한 줄 */
   .menu{
-    flex:1;          /* ⭐ 이게 진짜 핵심 */
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     gap:6px;
+
+    flex-wrap:nowrap;
+    overflow:visible;        /* ✅ 스크롤 금지 */
+    white-space:nowrap;
   }
 
-  /* 🔥 핵심 2 — 검색창 강제로 줄이기 */
-  .search-box{
-    width:120px;     /* flex 말고 width로 강제 */
-    flex:none;
-  }
-
-  /* 🔥 핵심 3 — 버튼 크기 줄이기 */
   .menu a{
     padding:4px 6px;
     font-size:13px;
+    white-space:nowrap;
   }
 
-  /* 🔥 핵심 4 — 좌우 여백 줄이기 (효과 큼) */
-  .topbar{
-    padding:8px 10px;
+  /* 검색창: 아랫줄 오른쪽에 붙여서 한 줄 유지 */
+  .search-box{
+    margin-left:8px;
+    flex:0 0 170px;          /* ✅ 검색창 폭 */
+    min-width:170px;
   }
 
+  .search{
+    width:100% !important;
+    font-size:13px;
+    padding:6px 8px;
+  }
 }
 
 </style>
