@@ -460,8 +460,38 @@ cursor:pointer;
 
 @media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
 
-  .menu{
+  /* 로고 / 메뉴 / 검색 3줄 */
+  .topbar{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+
+  /* 1줄 로고 가운데 */
+  .logo{
+    width:100%;
     justify-content:center;
+  }
+
+  /* 2줄 메뉴 가운데 */
+  .menu{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    overflow:visible;
+    white-space:normal;
+  }
+
+  /* 3줄 검색 */
+  .search-box{
+    width:100%;
+    max-width:500px;
+  }
+
+  .search{
+    width:100%;
   }
 
 }
@@ -486,58 +516,54 @@ font-weight:800;
 
 @media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
 
-  /* 2줄 구조 */
+  /* 🔥 핵심 — grid로 강제 2줄 */
   .topbar{
-    padding:10px 14px;
-    display:flex;
-    flex-direction:column;   /* ⭐ 로고 위, 메뉴+검색 아래 */
+    display:grid;
+    grid-template-columns:1fr 200px;
+    grid-template-areas:
+      "logo logo"
+      "menu search";
+
     align-items:center;
-    gap:10px;
+    gap:10px 14px;
+    padding:10px 16px;
   }
 
-  /* 윗줄: 로고 가운데 */
+  /* ✅ 1줄 — 로고 가운데 */
   .logo{
-    width:100%;
-    justify-content:center;
-    font-size:24px;
-    gap:8px;
-  }
-  .logo img{
-    width:44px;
-    height:44px;
-  }
-
-  /* 아랫줄: 메뉴 + 검색창 한 줄 */
-  .menu{
+    grid-area:logo;
     width:100%;
     display:flex;
     justify-content:center;
-    align-items:center;
-    gap:6px;
+  }
 
-    flex-wrap:nowrap;
-    overflow:visible;        /* ✅ 스크롤 금지 */
+  /* ✅ 2줄 — 메뉴 */
+  .menu{
+    grid-area:menu;
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    overflow:visible;
     white-space:nowrap;
   }
 
   .menu a{
-    padding:4px 6px;
+    padding:6px 8px;
     font-size:13px;
-    white-space:nowrap;
   }
 
-  /* 검색창: 아랫줄 오른쪽에 붙여서 한 줄 유지 */
+  /* ✅ 2줄 — 검색창 오른쪽 */
   .search-box{
-    margin-left:8px;
-    flex:0 0 170px;          /* ✅ 검색창 폭 */
-    min-width:170px;
+    grid-area:search;
+    width:200px;
+    justify-self:end;
   }
 
   .search{
-    width:100% !important;
-    font-size:13px;
-    padding:6px 8px;
+    width:100%;
   }
+
 }
 
 </style>
