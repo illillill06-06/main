@@ -472,36 +472,18 @@ transform:scale(1.2);
 font-weight:800;
 }
 
-/* =========================
-   ✅ iPad / 태블릿 최적화
-   ========================= */
+@media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
 
-/* iPad 세로/가로 공통(대부분 태블릿 폭) */
-@media (min-width:768px) and (max-width:1024px){
-
-  .container{
-    padding: 28px 18px;
-  }
-
-  /* 상단바: 너무 빡빡하지 않게 */
-  .topbar{
-    padding: 12px 20px;
-  }
-
-  /* 메뉴: 너무 길면 스크롤 허용(아이패드에서 특히 유용) */
   .menu{
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-    flex-wrap:nowrap;  
+    flex:1 1 auto;
+    min-width:0;
+    overflow-x:auto;
+    white-space:nowrap;
   }
 
-  /* 카드 이미지 높이: 태블릿 비율 맞추기 */
-  .live img{ height: 220px; }
-  .big img{ height: 220px; }
-
-  /* 글씨 살짝 정리 */
-  .photo-title{ font-size: 16px; }
+  .search-box{
+    flex:0 0 220px;
+  }
 
 }
 
