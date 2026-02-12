@@ -512,11 +512,12 @@ font-weight:800;
   transform:scale(1.08);
 }
 
-@media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
+/* ✅ iPad 가로(터치기기만) : 로고 1줄 / 메뉴+검색 2줄 */
+@media (hover: none) and (pointer: coarse) and (min-width:768px) and (max-width:1366px) and (orientation:landscape){
 
   .topbar{
-    display:grid;
-    grid-template-columns: 1fr 260px;   /* 검색창 더 길게 */
+    display:grid !important;
+    grid-template-columns: 1fr 280px;   /* 검색창 더 길게 */
     grid-template-areas:
       "logo logo"
       "menu search";
@@ -529,27 +530,22 @@ font-weight:800;
     grid-area:logo;
     width:100%;
     display:flex;
-    justify-content:center;             /* 로고 가운데 */
+    justify-content:center;
   }
 
   .menu{
     grid-area:menu;
     display:flex;
     align-items:center;
-    justify-content:center;             /* 메뉴가 왼쪽에만 붙는거 해결 */
-    gap:14px;                           /* 메뉴 간격 */
+    justify-content:center;   /* 왼쪽 몰림 해결 */
+    gap:14px;                 /* 메뉴 간격 */
     overflow:visible;
     white-space:nowrap;
   }
 
-  .menu a{
-    padding:6px 10px;
-    font-size:13px;
-  }
-
   .search-box{
     grid-area:search;
-    width:260px;                        /* 검색창 더 길게 */
+    width:280px;              /* 검색창 더 길게 */
     justify-self:end;
   }
 
