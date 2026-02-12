@@ -472,21 +472,6 @@ transform:scale(1.2);
 font-weight:800;
 }
 
-@media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
-
-  .menu{
-    flex:1 1 auto;
-    min-width:0;
-    overflow-x:auto;
-    white-space:nowrap;
-  }
-
-  .search-box{
-    flex:0 0 220px;
-  }
-
-}
-
 .promise-menu:hover{
   transform:scale(1.08);
 }
@@ -506,14 +491,23 @@ font-weight:800;
   }
 
   .search-box{
-    flex:0 0 180px;   /* ✅ 더 확실하게: 200 -> 180 */
+    flex:0 0 180px;
     min-width:0;
     box-sizing:border-box;
   }
 
   .search{
-    width:100% !important; /* ✅ 220px 고정폭 죽이기 */
+    width:100% !important;
     min-width:0;
+  }
+
+  /* ✅✅✅ 여기 바로 아래에 추가 */
+  .menu{
+    gap:8px;           /* 간격 줄임 */
+  }
+  .menu a{
+    padding:6px 8px;   /* 버튼 여백 줄임 */
+    font-size:14px;    /* 글씨 살짝 줄임 */
   }
 }
 
