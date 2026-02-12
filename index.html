@@ -460,21 +460,19 @@ cursor:pointer;
 
 @media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
 
-  /* 로고 / 메뉴 / 검색 3줄 */
   .topbar{
     display:flex;
     flex-direction:column;
     align-items:center;
     gap:10px;
+    padding:12px 20px;
   }
 
-  /* 1줄 로고 가운데 */
   .logo{
     width:100%;
     justify-content:center;
   }
 
-  /* 2줄 메뉴 가운데 */
   .menu{
     width:100%;
     display:flex;
@@ -484,10 +482,10 @@ cursor:pointer;
     white-space:normal;
   }
 
-  /* 3줄 검색 */
   .search-box{
     width:100%;
-    max-width:500px;
+    max-width:none;
+    box-sizing:border-box;
   }
 
   .search{
@@ -514,7 +512,7 @@ font-weight:800;
   transform:scale(1.08);
 }
 
-@media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
+@media (min-width:768px) and (max-width:1366px) and (orientation:landscape){
 
   /* 🔥 핵심 — grid로 강제 2줄 */
   .topbar{
