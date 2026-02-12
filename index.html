@@ -487,46 +487,16 @@ font-weight:800;
 
 }
 
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
-
-  .topbar{
-    padding:10px 16px;   /* ⭐ 여기 */
-    gap:12px;
-  }
-
-  .grid-top{
-    grid-template-columns: 2fr 1fr 1fr;
-  }
-
-  .live img{ height: 230px; }
-
-  /* ⭐ 여기부터 추가 */
-  .topbar{
-    gap:12px;
-  }
-
-  .menu{
-    flex: 1 1 auto;
-    min-width: 0;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .search-box{
-    flex: 0 0 240px;
-    min-width:240px;
-  }
-
-}
-
 .promise-menu:hover{
   transform:scale(1.08);
 }
 
-/* 🔥🔥🔥 여기부터 붙여넣기 */
 @media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
 
-  .topbar{ gap:12px; }
+  .topbar{
+    padding:10px 16px;
+    gap:12px;
+  }
 
   .menu{
     flex:1 1 auto;
@@ -536,13 +506,13 @@ font-weight:800;
   }
 
   .search-box{
-    flex:0 0 200px;
+    flex:0 0 180px;   /* ✅ 더 확실하게: 200 -> 180 */
     min-width:0;
     box-sizing:border-box;
   }
 
   .search{
-    width:100% !important;
+    width:100% !important; /* ✅ 220px 고정폭 죽이기 */
     min-width:0;
   }
 }
