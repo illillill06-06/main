@@ -479,51 +479,38 @@ font-weight:800;
 @media (min-width:768px) and (max-width:1024px) and (orientation:landscape){
 
   .topbar{
-    padding:10px 16px;
-    gap:12px;
+    padding:8px 12px;
+    gap:6px;
+  }
+
+  .logo{
+    font-size:22px;
+    gap:6px;
+  }
+
+  .logo img{
+    width:40px;
+    height:40px;
   }
 
   .menu{
-    flex:1 1 auto;
-    min-width:0;
-    overflow-x:auto;
-    white-space:nowrap;
+    gap:4px;
+  }
+
+  .menu a{
+    padding:4px 6px;
+    font-size:13px;
   }
 
   .search-box{
-    flex:0 0 180px;
-    min-width:0;
-    box-sizing:border-box;
+    flex:0 0 140px;
   }
 
   .search{
     width:100% !important;
-    min-width:0;
+    padding:6px 8px;
+    font-size:13px;
   }
-
-  /* ✅✅✅ 여기 바로 아래에 추가 */
-  .menu{
-    gap:8px;           /* 간격 줄임 */
-  }
-  .menu a{
-    padding:6px 8px;   /* 버튼 여백 줄임 */
-    font-size:14px;    /* 글씨 살짝 줄임 */
-  }
-}
-
-/* ⭐ 아이패드 세로에서 검색창 아래로 보내기 */
-@media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
-
-
-.topbar{
-  flex-wrap:wrap;
-}
-
-.search-box{
-  width:100%;
-  margin-top:8px;
-}
-
 }
 
 </style>
