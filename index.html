@@ -718,7 +718,7 @@ card.style.display = "block";
 card.innerHTML = `
 <div id="liveClick" style="cursor:pointer;">
 
-  <img id="liveImg" src="live-default.jpg"
+  <img id="liveImg" src="live.gif"
   style="width:100%;height:240px;object-fit:cover;border-radius:18px;">
 
   <div style="padding:10px;font-weight:700;">
@@ -792,7 +792,7 @@ async function updateLiveDot(){
       text.innerText = "방송 준비중";
       title.innerText = "";
 
-      img.src = "live-default.jpg";
+      img.src = "live.gif";
 
       card.onclick = () =>
         window.open("https://play.sooplive.co.kr/bc3yu2fl");
