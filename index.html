@@ -363,7 +363,7 @@ cursor:pointer;
   padding: 10px 14px;
   display:flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;   /* stretch → center 로 변경 */
   gap: 10px;
 }
 
@@ -378,19 +378,17 @@ cursor:pointer;
 }
 
   /* 메뉴: 가로 스크롤 */
-  .menu{
-    width:100%;
-    display:flex;
-    justify-content:flex-start;
-    gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap;
-    padding-bottom: 6px;
-    touch-action: pan-x;
-    align-items: center;
-  }
+.menu{
+  width:100%;
+  display:flex;
+  justify-content:flex-start;
+
+  gap: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  padding-bottom: 6px;
+}
 
   .menu a{
     display: inline-flex;
@@ -452,11 +450,12 @@ cursor:pointer;
     padding: 12px 12px;
   }
 
-.modal-close{
-  top: 14px;
-  right: 16px;
-  font-size: 44px;
-}
+  /* 모달 닫기 버튼: 터치 쉽게 */
+  .modal-close{
+    top: 14px;
+    right: 16px;
+    font-size: 44px;
+  }
 }
 
 @media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
@@ -513,76 +512,44 @@ font-weight:800;
   transform:scale(1.08);
 }
 
-/* ⭐⭐⭐ 여기부터 붙여넣기 ⭐⭐⭐ */
+/* ✅ iPad 가로(터치기기만) : 로고 1줄 / 메뉴+검색 2줄 */
+@media (hover: none) and (pointer: coarse) and (min-width:768px) and (max-width:1366px) and (orientation:landscape){
 
-.dropdown{ position:relative; flex:0 0 auto; }
-
-/* ⭐ 여기 추가 */
-.dropdown::after{
-  content:"";
-  position:absolute;
-  left:0;
-  top:100%;
-  width:100%;
-  height:12px;
-}
-
-/* 아래는 그대로 */
-.dropbtn{
-  border:0;
-  background:transparent;
-  font:inherit;
-  color:#333;
-  padding:8px 14px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:600;
-  transition:0.15s;
-}
-
-.dropbtn:hover{ background:rgba(255,255,255,0.6); }
-
-.dropdown-content{
-  display:none;
-  position:absolute;
-  top:calc(100% + 10px);
-  left:0;
-  min-width:200px;
-  background:#fff;
-  border:1px solid #eee;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.10);
-  padding:8px;
-  z-index:2000;
-}
-
-.dropdown-content a{
-  display:block;
-  padding:10px 10px;
-  border-radius:10px;
-  color:#111;
-  text-decoration:none;
-  white-space:nowrap;
-}
-
-.dropdown-content a:hover{ background:#f5f5f5; }
-
-@media (hover:hover){
-  .dropdown:hover .dropdown-content{ display:block; }
-}
-
-.dropdown.open .dropdown-content{ display:block; }
-
-/* ✅ 모바일: 메뉴 overflow에 안 잘리게 화면(fixed)에 띄우기 */
-@media (max-width:600px){
-  .dropdown-content{
-    position: fixed !important;
-    left: 14px;
-    right: 14px;
-    top: 110px;
-    min-width: 0;
-    z-index: 99999;
+  .topbar{
+    display:grid !important;
+    grid-template-columns: 1fr 280px;   /* 검색창 더 길게 */
+    grid-template-areas:
+      "logo logo"
+      "menu search";
+    align-items:center;
+    gap:12px 18px;
+    padding:10px 16px;
   }
+
+  .logo{
+    grid-area:logo;
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
+
+  .menu{
+    grid-area:menu;
+    display:flex;
+    align-items:center;
+    justify-content:center;   /* 왼쪽 몰림 해결 */
+    gap:14px;                 /* 메뉴 간격 */
+    overflow:visible;
+    white-space:nowrap;
+  }
+
+  .search-box{
+    grid-area:search;
+    width:280px;              /* 검색창 더 길게 */
+    justify-self:end;
+  }
+
+  .search{ width:100%; }
 }
 
 </style>
@@ -597,20 +564,18 @@ font-weight:800;
   Ewol
 </a>
 
-<div class="menu">
-  <a href="https://play.sooplive.co.kr/bc3yu2fl" target="_blank" class="live-menu"> 🔴LIVE</a>
-  <a href="https://www.sooplive.co.kr/station/bc3yu2fl/board" target="_blank" class="notice-menu"> 📢공지</a>
-  <a href="javascript:void(0);" onclick="openPromise()" class="promise-menu"> 📜공약</a>
-  <a href="https://www.ggpay.co.kr/goods/catalog?page=1&searchMode=catalog&category=c0004&per=40&filter_display=lattice"> 💎별풍선 충전</a>
-
-  <div class="dropdown">
-    <button class="dropbtn" type="button">📝시그표 ▾</button>
-    <div class="dropdown-content">
-      <a href="https://illillill06-06.github.io/label/" target="_blank">🎥 레이블시그표</a>
-      <a href="https://illillill06-06.github.io/ewol/" target="_blank">🎤 개인방송시그표</a>
-    </div>
+  <div class="menu">
+<a href="https://play.sooplive.co.kr/bc3yu2fl" target="_blank" class="live-menu"> 🔴LIVE
+</a>
+<a href="https://www.sooplive.co.kr/station/bc3yu2fl/board" target="_blank" class="notice-menu"> 📢공지
+</a>
+<a href="javascript:void(0);" onclick="openPromise()" class="promise-menu"> 📜공약
+</a>
+  <a href="https://www.ggpay.co.kr/goods/catalog?page=1&searchMode=catalog&category=c0004&per=40&filter_display=lattice"> 💎별풍선 충전
+</a>
+<a href="https://illillill06-06.github.io/label/" target="_blank"> 🎥레이블시그표</a>
+<a href="https://illillill06-06.github.io/ewol/" target="_blank"> 🎤개인방송시그표</a>
   </div>
-</div> <!-- ✅ menu 닫기 -->
 
 <div class="search-box">
   🔍︎
@@ -845,37 +810,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateLiveDot();
   setInterval(updateLiveDot, 20000);
 });
-</script>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const dropdown = document.querySelector(".dropdown");
-  const btn = document.querySelector(".dropbtn");
-  const menu = document.querySelector(".dropdown-content");
-  if (!dropdown || !btn || !menu) return;
-
-  function toggle(e){
-    e.preventDefault();
-    e.stopPropagation();
-
-    dropdown.classList.toggle("open");
-
-    if (dropdown.classList.contains("open")) {
-      const r = btn.getBoundingClientRect();
-      menu.style.top = (r.bottom + 8) + "px";
-    }
-  }
-
-  if ("ontouchstart" in window) {
-    btn.addEventListener("touchstart", toggle, { passive:false });
-  } else {
-    btn.addEventListener("click", toggle);
-  }
-
-  document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) dropdown.classList.remove("open");
-  });
-});
 </script>
 
 </body>
