@@ -378,7 +378,6 @@ cursor:pointer;
 }
 
   /* 메뉴: 가로 스크롤 */
-@media (max-width: 600px){
   .menu{
     width:100%;
     display:flex;
@@ -581,7 +580,16 @@ font-weight:800;
 }
 
 .dropdown.open .dropdown-content{ display:block; }
-
+/* ✅ 모바일: 메뉴 overflow에 안 잘리게 화면(fixed)에 띄우기 */
+@media (max-width:600px){
+  .dropdown-content{
+    position: fixed !important;
+    left: 14px;
+    right: 14px;
+    min-width: 0;
+    z-index: 99999;
+  }
+}
 /* ⭐⭐⭐ 여기까지 ⭐⭐⭐ */
 
 </style>
@@ -847,21 +855,29 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-const dropdownBtn = document.querySelector(".dropbtn");
 const dropdown = document.querySelector(".dropdown");
+const btn = document.querySelector(".dropbtn");
+const menu = document.querySelector(".dropdown-content");
 
-/* 시그표 누르면 열림/닫힘 */
-dropdownBtn.addEventListener("click", function(e){
+function toggleDropdown(e){
   e.preventDefault();
   e.stopPropagation();
-  dropdown.classList.toggle("open");
-});
 
-/* 바깥 누르면 닫힘 */
-document.addEventListener("click", function(e){
-  if(!dropdown.contains(e.target)){
-    dropdown.classList.remove("open");
+  dropdown.classList.toggle("open");
+
+  // ✅ 버튼 바로 아래에 뜨게 top 계산 (모바일 fixed용)
+  if (dropdown.classList.contains("open")) {
+    const r = btn.getBoundingClientRect();
+    menu.style.top = (r.bottom + 8) + "px";
   }
+}
+
+btn.addEventListener("click", toggleDropdown);
+// 모바일에서 클릭 안 먹는 경우 대비
+btn.addEventListener("touchstart", toggleDropdown, { passive:false });
+
+document.addEventListener("click", (e) => {
+  if (!dropdown.contains(e.target)) dropdown.classList.remove("open");
 });
 </script>
 
