@@ -457,14 +457,6 @@ cursor:pointer;
   right: 16px;
   font-size: 44px;
 }
-
-/* 여기다 넣는거다 ↓↓↓ */
-.dropdown-content{
-  position: static;
-  width: 100%;
-  box-shadow:none;
-  margin-top:6px;
-}
 }
 
 @media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
@@ -590,13 +582,6 @@ font-weight:800;
     top: 110px;
     min-width: 0;
     z-index: 99999;
-  }
-}
-
-@media (max-width:600px){
-  .menu{
-    overflow-x: auto;
-    overflow-y: visible;   /* ✅ 세로는 잘리지 않게 */
   }
 }
 
@@ -863,29 +848,33 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-const dropdown = document.querySelector(".dropdown");
-const btn = document.querySelector(".dropbtn");
-const menu = document.querySelector(".dropdown-content");
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdown = document.querySelector(".dropdown");
+  const btn = document.querySelector(".dropbtn");
+  const menu = document.querySelector(".dropdown-content");
+  if (!dropdown || !btn || !menu) return;
 
-function toggleDropdown(e){
-  e.preventDefault();
-  e.stopPropagation();
+  function toggle(e){
+    e.preventDefault();
+    e.stopPropagation();
 
-  dropdown.classList.toggle("open");
+    dropdown.classList.toggle("open");
 
-  // ✅ 버튼 바로 아래에 뜨게 top 계산 (모바일 fixed용)
-  if (dropdown.classList.contains("open")) {
-    const r = btn.getBoundingClientRect();
-    menu.style.top = (r.bottom + 8) + "px";
+    if (dropdown.classList.contains("open")) {
+      const r = btn.getBoundingClientRect();
+      menu.style.top = (r.bottom + 8) + "px";
+    }
   }
-}
 
-btn.addEventListener("click", toggleDropdown);
-// 모바일에서 클릭 안 먹는 경우 대비
-btn.addEventListener("touchstart", toggleDropdown, { passive:false });
+  if ("ontouchstart" in window) {
+    btn.addEventListener("touchstart", toggle, { passive:false });
+  } else {
+    btn.addEventListener("click", toggle);
+  }
 
-document.addEventListener("click", (e) => {
-  if (!dropdown.contains(e.target)) dropdown.classList.remove("open");
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) dropdown.classList.remove("open");
+  });
 });
 </script>
 
