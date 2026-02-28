@@ -378,17 +378,20 @@ cursor:pointer;
 }
 
   /* 메뉴: 가로 스크롤 */
-.menu{
-  width:100%;
-  display:flex;
-  justify-content:flex-start;
-
-  gap: 10px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  white-space: nowrap;
-  padding-bottom: 6px;
-}
+@media (max-width: 600px){
+  .menu{
+    width:100%;
+    display:flex;
+    justify-content:flex-start;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    padding-bottom: 6px;
+    touch-action: pan-x;
+    align-items: center;
+  }
 
   .menu a{
     display: inline-flex;
@@ -841,6 +844,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateLiveDot();
   setInterval(updateLiveDot, 20000);
 });
+</script>
 
 <script>
 const dropdownBtn = document.querySelector(".dropbtn");
