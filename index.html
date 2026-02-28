@@ -363,7 +363,7 @@ cursor:pointer;
   padding: 10px 14px;
   display:flex;
   flex-direction: column;
-  align-items: center;   /* stretch → center 로 변경 */
+  align-items: stretch;
   gap: 10px;
 }
 
@@ -450,12 +450,19 @@ cursor:pointer;
     padding: 12px 12px;
   }
 
-  /* 모달 닫기 버튼: 터치 쉽게 */
-  .modal-close{
-    top: 14px;
-    right: 16px;
-    font-size: 44px;
-  }
+.modal-close{
+  top: 14px;
+  right: 16px;
+  font-size: 44px;
+}
+
+/* 여기다 넣는거다 ↓↓↓ */
+.dropdown-content{
+  position: static;
+  width: 100%;
+  box-shadow:none;
+  margin-top:6px;
+}
 }
 
 @media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
@@ -835,17 +842,22 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateLiveDot, 20000);
 });
 
-</script>
-
-<!-- ⭐ 드롭다운 모바일 클릭 동작 -->
 <script>
-document.addEventListener("click", (e) => {
-  const dd = e.target.closest(".dropdown");
-  document.querySelectorAll(".dropdown.open").forEach(x => {
-    if (x !== dd) x.classList.remove("open");
-  });
-  if (!dd) return;
-  if (e.target.closest(".dropbtn")) dd.classList.toggle("open");
+const dropdownBtn = document.querySelector(".dropbtn");
+const dropdown = document.querySelector(".dropdown");
+
+/* 시그표 누르면 열림/닫힘 */
+dropdownBtn.addEventListener("click", function(e){
+  e.preventDefault();
+  e.stopPropagation();
+  dropdown.classList.toggle("open");
+});
+
+/* 바깥 누르면 닫힘 */
+document.addEventListener("click", function(e){
+  if(!dropdown.contains(e.target)){
+    dropdown.classList.remove("open");
+  }
 });
 </script>
 
