@@ -458,15 +458,6 @@ cursor:pointer;
   font-size: 44px;
 }
 
-/* 여기다 넣는거다 ↓↓↓ */
-.dropdown-content{
-  position: static;
-  width: 100%;
-  box-shadow:none;
-  margin-top:6px;
-}
-}
-
 @media (min-width:768px) and (max-width:1024px) and (orientation:portrait){
 
   .topbar{
@@ -579,7 +570,7 @@ font-weight:800;
   .dropdown:hover .dropdown-content{ display:block; }
 }
 
-.dropdown.open .dropdown-content{ display:block; }
+.dropdown.open .dropdown-content{ display:block !important; }
 /* ✅ 모바일: 메뉴 overflow에 안 잘리게 화면(fixed)에 띄우기 */
 @media (max-width:600px){
   .dropdown-content{
